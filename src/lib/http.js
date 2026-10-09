@@ -26,8 +26,10 @@ export async function getJson(url, opt = {}) {
       if (json === null) throw new Error(`JSON 아님: ${text.slice(0, 300)}`);
       return { json, text, status: res.status };
     } catch (e) {
-      if (e.fatal || attempt === retries) throw e;
-      log(`  재시도 ${attempt}/${retries} (${label}): ${String(e.message).split('\n')[0].slice(0, 120)}`);
+      // undici 의 "fetch failed" 는 원인이 cause 에만 있어서(ECONNRESET, ETIMEDOUT, 인증서 오류 등) 메시지에 붙여 준다
+      const why = e.cause ? ` — ${e.cause.code ?? ''} ${e.cause.message ?? ''}`.trimEnd() : '';
+      if (e.fatal || attempt === retries) { if (why && !e.fatal) throw Object.assign(new Error(`${e.message}${why}`), { cause: e.cause }); throw e; }
+      log(`  재시도 ${attempt}/${retries} (${label}): ${String(e.message).split('\n')[0].slice(0, 120)}${why}`);
       await new Promise((r) => setTimeout(r, 1500 * attempt));
     } finally { clearTimeout(t); }
   }
