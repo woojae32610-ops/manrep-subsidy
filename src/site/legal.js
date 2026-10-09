@@ -10,7 +10,8 @@ export function legalPages({ site, sourceNames, today }) {
   const cafe = esc(site.cafeName);
   const op = esc(site.legal?.operator || `${site.cafeName} 카페 운영진`);
   const eff = ymdKo(site.legal?.effective || today);
-  const cafeLink = `<a href="${esc(site.cafeUrl)}" target="_blank" rel="noopener">${cafe} 카페</a>`;
+  const boardUrl = site.contact?.url || site.cafeUrl;
+  const boardLink = `<a href="${esc(boardUrl)}" target="_blank" rel="noopener">${cafe} 카페 ${esc(site.contact?.name ?? '문의 게시판')}</a>`;
 
   const terms = `
 <h1>이용약관</h1>
@@ -42,7 +43,7 @@ export function legalPages({ site, sourceNames, today }) {
 <p>운영자는 서비스 내용을 바꾸거나 운영을 멈출 수 있으며, 중요한 변경은 사이트에 알립니다.</p>
 
 <h2>제7조 (문의)</h2>
-<p>잘못된 정보나 문의 사항은 ${cafeLink}로 알려 주세요.</p>
+<p>잘못된 정보나 문의 사항은 ${boardLink}에 알려 주세요.</p>
 
 <p class="eff">이 약관은 ${eff}부터 적용합니다.</p>`;
 
@@ -67,7 +68,7 @@ export function legalPages({ site, sourceNames, today }) {
 </ul>
 
 <h2>5. 문의</h2>
-<p>개인정보 관련 문의는 ${op}에게 ${cafeLink}를 통해 해 주세요.</p>
+<p>개인정보 관련 문의는 ${boardLink}에 남겨 주세요. ${op}이 확인합니다.</p>
 
 <h2>6. 변경</h2>
 <p>이 방침이 바뀌면 이 페이지에 바뀐 내용과 날짜를 함께 알립니다.</p>`;

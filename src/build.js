@@ -14,6 +14,10 @@ import { ROOT, SITE_DIR, loadItems, todayKST, fmtDateKo, daysBetween, esc, log }
 
 const { site, taxonomy, filter, sources: SRC } = config;
 const srcLabel = (s) => SRC[s]?.label ?? '정부24';
+// 문의 창구 링크 (카페 문의·신고 게시판)
+const contactUrl = site.contact?.url || site.cafeUrl;
+const contactLink = `<a href="${esc(contactUrl)}" target="_blank" rel="noopener">${esc(site.cafeName)} 카페 ${esc(site.contact?.name ?? '')}</a>`.replace(/\s+<\/a>/, '</a>');
+const contactNote = String(site.contact?.note ?? '').split('{link}').map(esc).join(contactLink);
 // 브랜드 이미지(캐릭터·배너): src/site/brand/ 에 파일이 있을 때만 씀
 const BRAND_DIR = path.join(ROOT, 'src', 'site', 'brand');
 const brandAsset = (name) => (name && fs.existsSync(path.join(BRAND_DIR, name))) ? `assets/brand/${name}` : null;
@@ -106,7 +110,7 @@ ${body}
 </main>
 <footer class="footer"><div class="wrap">
   <b>이 사이트에 대해</b><br>
-  ${esc(site.name)}은 ${esc(site.cafeName)} 카페가 회원 사장님들을 위해 운영하는 안내 페이지입니다. 공고 데이터는 ${esc(sourceNames)}의 공공데이터(이용 제한 없음)를 매일 자동으로 받아오고, 요약과 체크리스트는 AI가 작성한 뒤 숫자를 원문과 대조합니다. 그래도 틀린 부분이 있을 수 있으니 신청 자격·금액·기한은 각 페이지의 <b>공고 원문</b>과 <b>접수 기관</b>에서 마지막으로 확인해 주세요. ${esc(site.contactNote)}
+  ${esc(site.name)}은 ${esc(site.cafeName)} 카페가 회원 사장님들을 위해 운영하는 안내 페이지입니다. 공고 데이터는 ${esc(sourceNames)}의 공공데이터(이용 제한 없음)를 매일 자동으로 받아오고, 요약과 체크리스트는 AI가 작성한 뒤 숫자를 원문과 대조합니다. 그래도 틀린 부분이 있을 수 있으니 신청 자격·금액·기한은 각 페이지의 <b>공고 원문</b>과 <b>접수 기관</b>에서 마지막으로 확인해 주세요. ${contactNote}
   <div class="links"><a href="${rel}terms.html">이용약관</a> · <a href="${rel}privacy.html">개인정보처리방침</a> · <a href="${esc(site.cafeUrl)}" target="_blank" rel="noopener">${esc(site.cafeName)} 카페</a> · <span>출처: ${esc(sourceNames)}</span></div>
   <div style="margin-top:10px">© ${today.slice(0, 4)} ${esc(site.name)}</div>
 </div></footer>

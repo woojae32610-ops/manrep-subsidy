@@ -11,7 +11,12 @@ export default {
     url: 'https://woojae32610-ops.github.io/manrep-subsidy', // 사이트 주소 (끝에 / 없이) — OG 태그·sitemap 에 사용
     cafeUrl: 'https://cafe.naver.com/whduddn0317',
     cafeName: '만렙사장',
-    contactNote: '잘못된 내용을 발견하시면 카페로 알려주세요. 바로 고치겠습니다.',
+    // 문의 창구: 카페 "문의·신고 게시판". url 에 게시판 주소를 넣으면 바로 그 게시판으로 연결 (비어 있으면 카페 대문)
+    contact: {
+      name: '문의·신고 게시판',
+      url: '',
+      note: '잘못된 내용을 발견하시면 {link}에 알려주세요. 바로 고치겠습니다.', // {link} 자리에 게시판 링크가 들어감
+    },
     // 이미지: src/site/brand/ 폴더에 이 이름으로 파일을 넣으면 자동으로 쓰임 (없으면 글자로 대체)
     brand: {
       logo: 'logo.png',           // 헤더 왼쪽 캐릭터/로고 (권장 높이 40px 기준, 정사각형 PNG)
