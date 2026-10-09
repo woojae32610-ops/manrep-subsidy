@@ -1,32 +1,51 @@
-# 매일 아침 자동 실행: 수집 → AI 요약 → 사이트 생성 → GitHub Pages 배포
-# 준비: GitHub 저장소 Settings → Secrets and variables → Actions 에 GOV24_API_KEY, ANTHROPIC_API_KEY 등록
+# 매일 아침 자동 실행: 수집 → AI 요약 → 링크 점검 → 사이트 생성 → GitHub Pages 배포
+# 준비: Settings → Secrets and variables → Actions 에 GOV24_API_KEY, ANTHROPIC_API_KEY 등록
 #       Settings → Pages → Source: "GitHub Actions"
 name: daily
+
 on:
   schedule:
     - cron: '0 21 * * *'   # 06:00 KST
   workflow_dispatch:        # Actions 탭에서 수동 실행 버튼
+
 permissions:
   contents: write
   pages: write
   id-token: write
+
 concurrency:
   group: daily
   cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
-        with: { node-version: 22, cache: npm }
+        with:
+          node-version: 22
+          cache: npm
+
       - run: npm ci
-      - run: node src/collect.js
-        env: { GOV24_API_KEY: ${{ secrets.GOV24_API_KEY }} }
-      - run: node src/summarize.js
-        env: { ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }} }
-      - run: node src/checklinks.js
-      - run: node src/build.js
+
+      - name: collect
+        run: node src/collect.js
+        env:
+          GOV24_API_KEY: ${{ secrets.GOV24_API_KEY }}
+
+      - name: summarize
+        run: node src/summarize.js
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+      - name: check links
+        run: node src/checklinks.js
+
+      - name: build site
+        run: node src/build.js
+
       # 요약 결과(items.json)를 저장소에 다시 커밋 → 다음 날 같은 공고를 다시 요약하지 않음
       - name: commit data
         run: |
@@ -34,13 +53,19 @@ jobs:
           git config user.email "bot@users.noreply.github.com"
           git add data/items.json data/field-report.md data/review.md
           git diff --cached --quiet || git commit -m "data: $(date -u +%F) 수집·요약"
+          git pull --rebase origin main || true
           git push
+
       - uses: actions/upload-pages-artifact@v3
-        with: { path: site }
+        with:
+          path: site
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    environment: { name: github-pages, url: ${{ steps.deployment.outputs.page_url }} }
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
