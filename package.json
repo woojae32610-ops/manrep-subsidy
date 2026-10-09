@@ -1,0 +1,25 @@
+{
+  "name": "manrep-subsidy",
+  "version": "0.1.0",
+  "private": true,
+  "description": "만렙사장 지원사업 모음 사이트 — 정부24 공공서비스 API 수집 → Claude 요약·분류 → 정적 사이트 생성",
+  "type": "module",
+  "scripts": {
+    "collect": "node src/collect.js",
+    "collect:sample": "node src/collect.js --sample",
+    "summarize": "node src/summarize.js",
+    "summarize:dry": "node src/summarize.js --dry-run",
+    "links": "node src/checklinks.js",
+    "build": "node src/build.js",
+    "all": "node src/collect.js && node src/summarize.js && node src/checklinks.js && node src/build.js",
+    "all:sample": "node src/collect.js --sample && node src/build.js",
+    "serve": "node src/serve.js",
+    "test": "node src/test.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.132.1"
+  }
+}
