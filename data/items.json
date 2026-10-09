@@ -142345,7 +142345,7 @@
     "status": "상시",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "c45d05e8488c",
       "model": "claude-opus-5-5",
@@ -142406,7 +142406,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "PBLN_000000000126320": {
     "id": "PBLN_000000000126320",
