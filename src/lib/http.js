@@ -9,7 +9,7 @@ const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
  * @returns {Promise<{json:any, text:string, status:number}>}
  */
 export async function getJson(url, opt = {}) {
-  const { timeoutMs = 30000, retries = 3, label = 'http', isAuthError } = opt;
+  const { timeoutMs = 30000, retries = 4, label = 'http', isAuthError } = opt;
   for (let attempt = 1; attempt <= retries; attempt++) {
     const ctrl = new AbortController();
     const t = setTimeout(() => ctrl.abort(), timeoutMs);

@@ -115,7 +115,13 @@ async function main() {
     if (!S[name]?.enabled) { results[name] = { skipped: '설정(config.sources)에서 꺼짐' }; continue; }
     log(`▶ ${S[name].label} 수집`);
     try {
-      const r = await loader();
+      // 기업마당·K-Startup 은 가끔 통째로 연결이 안 될 때가 있어(해외 IP·순간 장애) 1분 쉬고 한 번 더
+      const r = await loader().catch(async (e) => {
+        if (name === 'gov24' || useRaw || useSample) throw e;
+        log(`  ${S[name].label} 연결 실패 (${String(e.message).split('\n')[0].slice(0, 100)}) → 60초 후 재시도`);
+        await new Promise((r) => setTimeout(r, 60000));
+        return loader();
+      });
       results[name] = { ok: !r.skipped, ...r };
       if (r.skipped) log(`  건너뜀: ${r.skipped}`);
     } catch (e) {
