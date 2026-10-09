@@ -1,5 +1,5 @@
 # 매일 아침 자동 실행: 수집 → AI 요약 → 링크 점검 → 사이트 생성 → GitHub Pages 배포
-# 준비: Settings → Secrets and variables → Actions 에 GOV24_API_KEY, ANTHROPIC_API_KEY 등록
+# 준비: Settings → Secrets and variables → Actions 에 GOV24_API_KEY, BIZINFO_API_KEY, ANTHROPIC_API_KEY 등록
 #       Settings → Pages → Source: "GitHub Actions"
 name: daily
 
@@ -33,7 +33,8 @@ jobs:
       - name: collect
         run: node src/collect.js
         env:
-          GOV24_API_KEY: ${{ secrets.GOV24_API_KEY }}
+          GOV24_API_KEY: ${{ secrets.GOV24_API_KEY }}       # 정부24 + K-Startup (같은 공공데이터포털 키)
+          BIZINFO_API_KEY: ${{ secrets.BIZINFO_API_KEY }}   # 기업마당
 
       - name: summarize
         run: node src/summarize.js

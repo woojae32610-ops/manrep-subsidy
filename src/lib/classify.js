@@ -6,6 +6,9 @@ import { hasAny } from './util.js';
 const { taxonomy } = config;
 
 export function ruleRegion(item) {
+  // 기업마당·K-Startup 은 지역 필드가 따로 온다 ("서울", "광주, 전남", "전국")
+  const given = String(item.지역 ?? '');
+  if (given) { const hit = taxonomy.regions.find((r) => given.includes(r)); if (hit) return hit; }
   const org = `${item.소관기관명 ?? ''} ${item.접수기관명 ?? ''} ${item.접수기관 ?? ''}`;
   for (const [region, words] of Object.entries(taxonomy.regionKeywords)) {
     if (hasAny(org, words)) return region;

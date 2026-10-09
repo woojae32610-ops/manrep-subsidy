@@ -1,0 +1,41 @@
+# 소스 API 응답 점검 (수동): 각 API 첫 페이지만 불러 data/probe-report.md 에 실제 필드를 기록하고 커밋
+# 새 소스를 붙이거나 키를 바꿨을 때 "GitHub 서버에서 호출이 되는지 + 필드명이 뭔지" 확인용. items.json 은 건드리지 않음.
+name: probe
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: probe sources
+        run: node src/collect.js --probe
+        env:
+          GOV24_API_KEY: ${{ secrets.GOV24_API_KEY }}
+          BIZINFO_API_KEY: ${{ secrets.BIZINFO_API_KEY }}
+
+      - name: commit report
+        run: |
+          git config user.name "subsidy-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add data/probe-report.md
+          git diff --cached --quiet || git commit -m "probe: $(date -u +%F) 소스 응답 점검"
+          git pull --rebase origin main || true
+          git push

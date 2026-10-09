@@ -11,7 +11,8 @@ import config from '../config.js';
 import { ruleRegion, ruleSupportTypes, ruleTargets, ruleMaxAmount } from './lib/classify.js';
 import { ROOT, SITE_DIR, loadItems, todayKST, fmtDateKo, daysBetween, esc, log } from './lib/util.js';
 
-const { site, taxonomy, filter } = config;
+const { site, taxonomy, filter, sources: SRC } = config;
+const srcLabel = (s) => SRC[s]?.label ?? '정부24';
 const today = todayKST();
 const items = Object.values(loadItems());
 if (!items.length) { console.error('✖ data/items.json 이 비어 있어요. 먼저 node src/collect.js (또는 --sample)'); process.exit(1); }
@@ -47,6 +48,8 @@ function present(it) {
     region: ai?.region || ruleRegion(s),
     org: [s.소관기관명, s.접수기관명 || s.접수기관].filter(Boolean).join(' · '),
     updated: ymd(s.수정일시) || it.lastSeen,
+    source: it.source ?? 'gov24',
+    sourceLabel: srcLabel(it.source ?? 'gov24'),
     isNew: it.firstSeen > importDay && daysBetween(it.firstSeen, today) <= 7,
     aiModel: ai?.model ?? null,
     irrelevant: it.ai ? it.ai.relevant === false : it.gate?.relevant === false, // AI가 "소상공인과 무관" 판정 → 숨김
@@ -61,6 +64,10 @@ const visible = all.filter((p) => p.status !== '마감');
 const expiredKeep = all.filter((p) => p.status === '마감' && p.deadline && daysBetween(p.deadline, today) <= filter.keepExpiredDays);
 const isSample = all.some((p) => p.sample);
 const collectedAt = items.reduce((m, it) => (it.lastSeen > m ? it.lastSeen : m), '');
+// 실제로 데이터가 있는 소스만 출처로 표기 (config 순서대로)
+const usedSources = Object.keys(SRC).filter((s) => all.some((p) => p.source === s));
+const sourceLabels = usedSources.map((s) => SRC[s].label).join('·') || '정부24';
+const sourceNames = usedSources.map((s) => `${SRC[s].label}(${SRC[s].org})`).join(', ') || '정부24(행정안전부)';
 
 // ── 공통 레이아웃 ──
 const FONT = '<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">';
@@ -91,8 +98,8 @@ ${body}
 </main>
 <footer class="footer"><div class="wrap">
   <b>이 사이트에 대해</b><br>
-  ${esc(site.name)}은 ${esc(site.cafeName)} 카페가 회원 사장님들을 위해 운영하는 안내 페이지입니다. 공고 데이터는 행정안전부 정부24 공공서비스 정보(공공데이터, 이용 제한 없음)를 매일 자동으로 받아오고, 요약과 체크리스트는 AI가 작성한 뒤 숫자를 원문과 대조합니다. 그래도 틀린 부분이 있을 수 있으니 신청 자격·금액·기한은 각 페이지의 <b>공고 원문</b>과 <b>접수 기관</b>에서 마지막으로 확인해 주세요. ${esc(site.contactNote)}
-  <div class="links"><a href="${esc(site.cafeUrl)}" target="_blank" rel="noopener">${esc(site.cafeName)} 카페</a> · <span>출처: 정부24 공공서비스 정보(행정안전부)</span></div>
+  ${esc(site.name)}은 ${esc(site.cafeName)} 카페가 회원 사장님들을 위해 운영하는 안내 페이지입니다. 공고 데이터는 ${esc(sourceNames)}의 공공데이터(이용 제한 없음)를 매일 자동으로 받아오고, 요약과 체크리스트는 AI가 작성한 뒤 숫자를 원문과 대조합니다. 그래도 틀린 부분이 있을 수 있으니 신청 자격·금액·기한은 각 페이지의 <b>공고 원문</b>과 <b>접수 기관</b>에서 마지막으로 확인해 주세요. ${esc(site.contactNote)}
+  <div class="links"><a href="${esc(site.cafeUrl)}" target="_blank" rel="noopener">${esc(site.cafeName)} 카페</a> · <span>출처: ${esc(sourceNames)}</span></div>
   <div style="margin-top:10px">© ${today.slice(0, 4)} ${esc(site.name)}</div>
 </div></footer>
 ${scripts}
@@ -118,7 +125,7 @@ function indexPage() {
 <section class="hero">
   <h1>전국 소상공인 지원사업, 한눈에</h1>
   <p>${esc(site.tagline)}</p>
-  <div class="meta"><span>공고 수집 ${esc(fmtDateKo(collectedAt))}</span><span>총 ${visible.length}건</span><span>출처 정부24</span></div>
+  <div class="meta"><span>공고 수집 ${esc(fmtDateKo(collectedAt))}</span><span>총 ${visible.length}건</span><span>출처 ${esc(sourceLabels)}</span></div>
 </section>
 ${isSample ? '<div class="sample-banner">지금 보이는 건 샘플 데이터예요. 정부24 API 키를 .env 에 넣고 다시 수집하면 실제 공고로 바뀝니다.</div>' : ''}
 <section class="stats">${stats}</section>
@@ -153,7 +160,7 @@ function detailPage(p) {
   const detailOk = s.상세조회URL && L.detail !== 'dead';
   const applyUrl = applyOk ? s.온라인신청사이트URL : (detailOk ? s.상세조회URL : null);
   const linkNote = (L.apply === 'dead' || L.detail === 'dead')
-    ? `<p class="linknote">${L.apply === 'dead' ? '신청 페이지 링크가 지금 안 열려요. ' : ''}${L.detail === 'dead' ? '정부24에서 이 공고 페이지가 내려간 것 같아요. ' : ''}전화로 접수처에 확인해 보세요.</p>` : '';
+    ? `<p class="linknote">${L.apply === 'dead' ? '신청 페이지 링크가 지금 안 열려요. ' : ''}${L.detail === 'dead' ? `${p.sourceLabel}에서 이 공고 페이지가 내려간 것 같아요. ` : ''}전화로 접수처에 확인해 보세요.</p>` : '';
   const periodRaw = s.신청기한 || '';
   const periodMain = p.deadline ? `${fmtDateKo(p.deadline)} 마감` : p.status === '상시' ? '상시 접수' : p.status === '예정' ? `${fmtDateKo(p.start)} 시작` : '개별 공고 확인';
 
@@ -180,7 +187,7 @@ function detailPage(p) {
     ${docs.length ? `<div class="qa"><b>서류</b><ul class="plain">${docs.map((d) => `<li>${esc(d)}</li>`).join('')}</ul><p class="note">정확한 제출서류는 공고 원문·첨부파일 기준이에요.</p></div>` : ''}</section>`);
 
   const raw = [['지원대상', s.지원대상], ['선정기준', s.선정기준], ['지원내용', s.지원내용], ['신청기한', s.신청기한], ['구비서류', s.구비서류]].filter(([, v]) => v);
-  sections.push(`<details class="card sec raw"><summary>공고 원문 그대로 보기 <small>정부24에 등록된 문구</small></summary>
+  sections.push(`<details class="card sec raw"><summary>공고 원문 그대로 보기 <small>${esc(p.sourceLabel)}에 등록된 문구</small></summary>
     ${raw.map(([k, v]) => `<div class="qa"><b>${k}</b><p class="pre">${esc(v)}</p></div>`).join('')}</details>`);
 
   // ── 핵심 정보 패널 ──
@@ -191,10 +198,10 @@ function detailPage(p) {
     ${s.접수기관명 || s.접수기관 ? `<div class="kv2"><span>접수처</span><b>${esc(s.접수기관명 || s.접수기관)}</b></div>` : ''}
     ${s.소관기관명 ? `<div class="kv2"><span>주관</span><b>${esc(s.소관기관명)}${s.부서명 ? `<small>${esc(s.부서명)}</small>` : ''}</b></div>` : ''}
     ${phoneLines.length ? `<div class="kv2"><span>전화</span><b>${phoneLines.map(tel).join('<br>')}</b></div>` : ''}
-    ${applyUrl ? `<a class="cta" href="${esc(applyUrl)}" target="_blank" rel="noopener">${applyOk ? '신청 페이지로 가기' : '정부24에서 보기'} →</a>` : ''}
-    ${applyOk && detailOk ? `<a class="cta ghost" href="${esc(s.상세조회URL)}" target="_blank" rel="noopener">정부24 원문</a>` : ''}
+    ${applyUrl ? `<a class="cta" href="${esc(applyUrl)}" target="_blank" rel="noopener">${applyOk ? '신청 페이지로 가기' : `${esc(p.sourceLabel)}에서 보기`} →</a>` : ''}
+    ${applyOk && detailOk ? `<a class="cta ghost" href="${esc(s.상세조회URL)}" target="_blank" rel="noopener">${esc(p.sourceLabel)} 원문</a>` : ''}
     ${linkNote}
-    <p class="source">출처 정부24 · ${esc(p.updated)} 기준${p.aiModel ? ' · 요약은 AI 작성' : ''}</p>
+    <p class="source">출처 ${esc(p.sourceLabel)} · ${esc(p.updated)} 기준${p.aiModel ? ' · 요약은 AI 작성' : ''}</p>
   </div></aside>`;
 
   const body = `

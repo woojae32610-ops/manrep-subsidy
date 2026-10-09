@@ -21,6 +21,27 @@ export default {
     timeoutMs: 30000,
   },
 
+  // ── 수집 소스 ──
+  // 정부24 = "제도" 목록(기한 없는 게 많음), 기업마당·K-Startup = "모집공고"(접수기간 있음). 셋을 합쳐 보여준다.
+  // enabled: false 로 끄면 그 소스는 수집도, 기존 항목 제거도 하지 않는다.
+  sources: {
+    gov24: { enabled: true, label: '정부24', org: '행정안전부' },
+    bizinfo: {
+      enabled: true, label: '기업마당', org: '중소벤처기업부',
+      base: 'https://www.bizinfo.go.kr/uss/rss/bizinfoApi.do',   // 키: BIZINFO_API_KEY (기업마당 사이트에서 발급)
+      pageUnit: 500, maxPages: 20, timeoutMs: 60000,
+      maxAgeDays: 180,                                            // 이보다 오래 전에 등록된 공고는 안 들임 (기한이 남아 있으면 들임)
+      excludeFields: ['기술', '수출'],                              // 지원분야 대분류 — R&D·수출은 가게 사장님과 거리가 멂
+      excludeNames: ['R&D', 'R&amp;D', '기술개발', '연구개발', '특허', '산학', '스마트공장', '시제품', '실증', '테스트베드'],
+    },
+    kstartup: {
+      enabled: true, label: 'K-Startup', org: '창업진흥원',
+      base: 'https://apis.data.go.kr/B552735/kisedKstartupService01', // 키: GOV24_API_KEY 그대로 (공공데이터포털 활용신청 15125364)
+      perPage: 500, maxPages: 20, timeoutMs: 30000,
+      excludeNames: ['R&D', '기술개발', '딥테크', 'TIPS', '팁스'],
+    },
+  },
+
   // ── 소상공인 관련 공고만 남기기 ──
   // 1차(여기, 규칙): 전체 1만여 건 → 800건쯤.  2차(AI 게이트, 싼 모델): 진짜 사장님용인지 판정.
   // 실제 API 값 참고: 사용자구분 = "개인" | "가구" | "소상공인" | "법인/시설/단체" (|| 로 복수)

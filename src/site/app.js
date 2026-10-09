@@ -76,7 +76,7 @@
     const tags = [...it.targets.slice(0, 1), ...it.types.slice(0, 2)].map((t) => `<span class="tag t2">${esc(t)}</span>`).join('');
     const when = it.deadline ? `${mmdd(it.deadline)} 마감` : (it.status === '상시' ? '상시 접수' : it.status === '공고별' ? '기한 공고 확인' : it.status === '예정' ? '접수 예정' : '');
     return `<a class="row ${it.isNew ? 'is-new' : ''}" href="${it.url}">
-      <div class="row-head"><span class="badge ${it.status}">${STATUS_LABEL[it.status] || it.status}</span><span class="region">${esc(it.region)}</span></div>
+      <div class="row-head"><span class="badge ${it.status}">${STATUS_LABEL[it.status] || it.status}</span><span class="region">${esc(it.region)}</span><span class="src">${esc(it.sourceLabel || '')}</span></div>
       <div class="row-main">
         <h3>${esc(it.title)}${it.isNew ? '<span class="new">NEW</span>' : ''}</h3>
         <p>${esc(it.summary)}</p>

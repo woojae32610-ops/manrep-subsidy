@@ -84,6 +84,7 @@ button { font: inherit; cursor: pointer; }
 .row:hover { background: #f7f9fe; }
 .row-head { display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
 .row-head .region { font-size: 14px; font-weight: 700; color: #4a5563; padding-left: 2px; }
+.row-head .src { font-size: 12.5px; color: var(--muted); padding-left: 2px; }
 .row-main { min-width: 0; }
 .row-main h3 { margin: 0 0 4px; font-size: 18px; line-height: 1.35; letter-spacing: -.01em; display: flex; align-items: center; gap: 6px; }
 .row-main h3 .new { font-size: 10px; font-weight: 800; color: var(--red); background: var(--red-soft); padding: 2px 5px; border-radius: 4px; letter-spacing: .02em; }

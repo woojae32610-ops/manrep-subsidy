@@ -37,6 +37,12 @@ async function get(op, params) {
   }
 }
 
+/** 한 페이지만 (--probe 용) */
+export async function fetchPage(op, page = 1, perPage = 3) {
+  const j = await get(op, { page, perPage });
+  return { rows: j.data, total: j.matchCount ?? j.totalCount ?? null, json: j };
+}
+
 /** 한 엔드포인트의 모든 페이지를 모아 배열로 반환 */
 export async function fetchAll(op) {
   const out = [];
