@@ -9,6 +9,7 @@
 //       node src/summarize.js --dry-run     (프롬프트만 출력, 호출 안 함)
 //       node src/summarize.js --limit 5     (각 단계 앞 5건만 — 모델 비교·테스트용)
 //       node src/summarize.js --gate-only   (게이트만)
+//       node src/summarize.js --regate      (게이트 기준을 바꿨을 때: 전부 다시 판정. 이미 있는 요약은 그대로, 새로 통과한 것만 요약)
 //       node src/summarize.js --force       (전부 다시)
 //       node src/summarize.js --id B55307700011   (이 공고 하나만 다시 — 회원 지적 받았을 때)
 //       node src/summarize.js --model claude-sonnet-5-5
@@ -23,6 +24,7 @@ import { DATA_DIR, loadEnv, loadItems, saveItems, todayKST, argFlag, argValue, l
 loadEnv();
 const dry = argFlag('--dry-run');
 const force = argFlag('--force');
+const regate = argFlag('--regate');
 const gateOnly = argFlag('--gate-only');
 const limit = Number(argValue('--limit', 0)) || 0;
 const model = argValue('--model', config.llm.model);
@@ -49,7 +51,7 @@ if (argFlag('--recheck')) {
 if (onlyId && !items[onlyId]) { console.error(`✖ items.json 에 ${onlyId} 가 없어요.`); process.exit(1); }
 const live = Object.values(items).filter((it) => !it.removed && (it.status !== '마감' || it.id === onlyId) && (!onlyId || it.id === onlyId));
 
-let gateQueue = live.filter((it) => force || onlyId || !it.gate || it.gate.hash !== it.hash);
+let gateQueue = live.filter((it) => force || regate || onlyId || !it.gate || it.gate.hash !== it.hash);
 if (limit) gateQueue = gateQueue.slice(0, limit);
 log(`게이트 대상: ${gateQueue.length}건 (model: ${gateModel})`);
 

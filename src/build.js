@@ -52,7 +52,7 @@ function present(it) {
     sourceLabel: srcLabel(it.source ?? 'gov24'),
     isNew: it.firstSeen > importDay && daysBetween(it.firstSeen, today) <= 7,
     aiModel: ai?.model ?? null,
-    irrelevant: it.ai ? it.ai.relevant === false : it.gate?.relevant === false, // AI가 "소상공인과 무관" 판정 → 숨김
+    irrelevant: it.gate?.relevant === false || it.ai?.relevant === false, // 게이트나 요약 AI가 "사장님과 무관" 판정 → 숨김
     links: it.links || null,
     src: s,
     sample: !!it.sample,
@@ -61,6 +61,9 @@ function present(it) {
 
 const all = items.filter((it) => !it.removed).map(present).filter((p) => !p.irrelevant);
 const visible = all.filter((p) => p.status !== '마감');
+// 첫 화면 기본값: 사장님 대상(소상공인·예비창업자·폐업·재창업)만. 스타트업·중소기업 전용은 칩을 눌러야 보임 (app.js 와 같은 규칙)
+const CORE = ['소상공인', '예비창업자', '폐업·재창업'];
+const core = visible.filter((p) => p.targets.some((t) => CORE.includes(t)));
 const expiredKeep = all.filter((p) => p.status === '마감' && p.deadline && daysBetween(p.deadline, today) <= filter.keepExpiredDays);
 const isSample = all.some((p) => p.sample);
 const collectedAt = items.reduce((m, it) => (it.lastSeen > m ? it.lastSeen : m), '');
@@ -109,7 +112,7 @@ ${scripts}
 
 // ── 목록 페이지 ──
 function indexPage() {
-  const n = (f) => visible.filter(f).length;
+  const n = (f) => core.filter(f).length;
   const stats = [
     ['open', 'green', n((p) => p.status === '접수중' || p.status === '마감임박'), '접수 중'],
     ['soon', 'orange', n((p) => p.status === '마감임박'), '마감 임박 (7일 이내)'],
@@ -118,14 +121,14 @@ function indexPage() {
   ].map(([k, c, v, l]) => `<button class="stat ${c}" data-stat="${k}"><div class="n">${v}</div><div class="l">${l}</div></button>`).join('');
 
   const data = {
-    collectedAt, taxonomy,
+    collectedAt, taxonomy, core: CORE,
     items: visible.map(({ src, checklist, cautions, who, what, ...rest }) => rest),
   };
   const body = `
 <section class="hero">
   <h1>전국 소상공인 지원사업, 한눈에</h1>
   <p>${esc(site.tagline)}</p>
-  <div class="meta"><span>공고 수집 ${esc(fmtDateKo(collectedAt))}</span><span>총 ${visible.length}건</span><span>출처 ${esc(sourceLabels)}</span></div>
+  <div class="meta"><span>공고 수집 ${esc(fmtDateKo(collectedAt))}</span><span>사장님 대상 ${core.length}건</span><span>출처 ${esc(sourceLabels)}</span></div>
 </section>
 ${isSample ? '<div class="sample-banner">지금 보이는 건 샘플 데이터예요. 정부24 API 키를 .env 에 넣고 다시 수집하면 실제 공고로 바뀝니다.</div>' : ''}
 <section class="stats">${stats}</section>

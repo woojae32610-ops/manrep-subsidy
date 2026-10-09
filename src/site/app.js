@@ -3,6 +3,7 @@
   const D = JSON.parse(document.getElementById('data').textContent);
   const items = D.items;
   const TAX = D.taxonomy;
+  const CORE = D.core || ['소상공인', '예비창업자', '폐업·재창업']; // 대상 칩을 안 고르면 이 대상만 (스타트업·중소기업 전용은 칩으로)
   const PAGE = 12;
 
   const state = { target: '', region: '', type: '', q: '', sort: 'deadline', stat: '', shown: PAGE };
@@ -34,7 +35,7 @@
       `<button class="chip${state[key] === v ? ' on' : ''}" data-k="${key}" data-v="${esc(v)}">${esc(label)}</button>`).join('');
   }
   function renderFilters() {
-    $('#f-target').innerHTML = chips('target', TAX.targets, 'target', '전체');
+    $('#f-target').innerHTML = chips('target', TAX.targets, 'target', '사장님 전체');
     $('#f-region').innerHTML = chips('region', TAX.regions, 'region', '전체');
     $('#f-type').innerHTML = chips('type', TAX.supportTypes, 'type', '전체');
     $('#q').value = state.q;
@@ -45,7 +46,7 @@
   function filtered() {
     const q = state.q.trim().toLowerCase();
     let list = items.filter((it) => {
-      if (state.target && !it.targets.includes(state.target)) return false;
+      if (state.target ? !it.targets.includes(state.target) : !it.targets.some((t) => CORE.includes(t))) return false;
       if (state.region && state.region !== '전국' && it.region !== state.region && it.region !== '전국') return false;
       if (state.region === '전국' && it.region !== '전국') return false;
       if (state.type && !it.types.includes(state.type)) return false;

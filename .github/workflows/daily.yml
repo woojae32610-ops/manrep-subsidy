@@ -7,6 +7,11 @@ on:
   schedule:
     - cron: '0 21 * * *'   # 06:00 KST
   workflow_dispatch:        # Actions 탭에서 수동 실행 버튼
+    inputs:
+      regate:
+        description: '게이트(사장님 관련 여부) 전부 다시 판정 — 게이트 기준 바꿨을 때. Haiku라 저렴, 요약은 다시 안 함'
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -37,7 +42,7 @@ jobs:
           BIZINFO_API_KEY: ${{ secrets.BIZINFO_API_KEY }}   # 기업마당
 
       - name: summarize
-        run: node src/summarize.js
+        run: node src/summarize.js ${{ inputs.regate == true && '--regate' || '' }}
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
 

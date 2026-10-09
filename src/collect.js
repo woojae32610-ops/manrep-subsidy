@@ -188,6 +188,8 @@ async function main() {
   if (results.gov24 && results.gov24.ok === false && results.gov24.error) throw new Error(`정부24 수집 실패: ${results.gov24.error}`);
 }
 
+const EVENT_RE = /(^|[^A-Za-z])IR([^A-Za-z]|$)/; // "IR 데모데이", "(IR)" — FAIR 같은 단어 속 IR 은 제외 안 함
+
 /** 후보 등급: 'A' 사용자구분에 소상공인 / 'C' 직격 키워드 / 'B' 사업체 대상 + 사업 키워드 / null 제외 (모든 소스 공통) */
 export function candidateTier(row) {
   const F = config.filter;
@@ -195,6 +197,7 @@ export function candidateTier(row) {
   const nameTarget = `${row.서비스명 ?? ''} ${row.지원대상 ?? ''}`;
   const all = `${nameTarget} ${row.서비스목적요약 ?? ''}`;
   if (hasAny(row.서비스명 ?? '', F.excludeNames)) return null;
+  if (hasAny(row.서비스명 ?? '', F.excludeEvents) || EVENT_RE.test(row.서비스명 ?? '')) return null;
   if (user.includes('소상공인')) return 'A';
   if (F.excludeFields.includes(field)) return null;
   if (hasAny(nameTarget, F.strong)) return 'C';
