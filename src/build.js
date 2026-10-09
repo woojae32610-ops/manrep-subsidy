@@ -100,7 +100,6 @@ ${FONT}
 <body>
 <header class="header"><div class="wrap">
   <a class="logo" href="${rel}index.html">${logoImg ? `<img class="brandimg" src="${rel}${logoImg}" alt="">` : '<span class="mark">만</span>'}<span class="brandname">${esc(site.name)}</span></a>
-  <a class="cafe" href="${esc(site.cafeUrl)}" target="_blank" rel="noopener">☕ <span>${esc(site.cafeName)} 카페</span></a>
 </div></header>
 <main class="wrap">
 ${body}

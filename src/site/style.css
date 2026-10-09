@@ -38,8 +38,6 @@ button { font: inherit; cursor: pointer; }
 .logo .mark { width: 30px; height: 30px; border-radius: 9px; background: linear-gradient(135deg, var(--primary), #6ea0ff); display: grid; place-items: center; color: #fff; font-size: 14px; font-weight: 900; }
 .logo .brandimg { height: 40px; width: auto; display: block; }
 .logo .brandname { color: var(--primary); }
-.header .cafe { font-size: 14.5px; color: var(--muted); display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border: 1px solid var(--line); border-radius: 999px; }
-.header .cafe:hover { border-color: var(--primary); color: var(--primary); }
 
 /* ── 맨 위 카페 배너 (가운데, 크게) ── */
 .cafeband { margin: 18px 0 0; }
@@ -263,7 +261,6 @@ button { font: inherit; cursor: pointer; }
   .keybox { padding: 16px; }
   .qa { grid-template-columns: 1fr; gap: 2px; }
   .sec { padding: 18px 16px; }
-  .header .cafe span { display: none; }
   .kv { grid-template-columns: 64px 1fr; }
   .search { flex-wrap: wrap; }
   .search input { flex: 1 1 100%; }
