@@ -120039,7 +120039,7 @@
     "status": "접수중",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "89fa5d8dc3c3",
       "model": "claude-opus-5-5",
@@ -120104,7 +120104,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "PBLN_000000000127077": {
     "id": "PBLN_000000000127077",
@@ -120137,7 +120138,7 @@
     "status": "접수중",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": null,
     "tier": "B",
     "gate": {
@@ -120153,7 +120154,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "PBLN_000000000127071": {
     "id": "PBLN_000000000127071",
@@ -123174,7 +123176,7 @@
     "status": "접수중",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "98c992f119b5",
       "model": "claude-opus-5-5",
@@ -123234,7 +123236,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "PBLN_000000000126997": {
     "id": "PBLN_000000000126997",
@@ -124682,7 +124685,7 @@
     "status": "접수중",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "c1c3d932325c",
       "model": "claude-opus-5-5",
@@ -124747,7 +124750,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "PBLN_000000000126968": {
     "id": "PBLN_000000000126968",
@@ -124884,7 +124888,7 @@
     "status": "접수중",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "fe341438fb9f",
       "model": "claude-opus-5-5",
@@ -124948,7 +124952,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "PBLN_000000000126965": {
     "id": "PBLN_000000000126965",
@@ -125359,7 +125364,7 @@
     "status": "접수중",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "b5f1c1ca3080",
       "model": "claude-opus-5-5",
@@ -125416,7 +125421,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "PBLN_000000000126957": {
     "id": "PBLN_000000000126957",
@@ -126575,7 +126581,7 @@
     "status": "접수중",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "cb22a628b5f1",
       "model": "claude-opus-5-5",
@@ -126641,7 +126647,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "PBLN_000000000126936": {
     "id": "PBLN_000000000126936",
@@ -126970,7 +126977,7 @@
     "status": "마감임박",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "9896f45dd803",
       "model": "claude-opus-5-5",
@@ -127031,7 +127038,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "PBLN_000000000126929": {
     "id": "PBLN_000000000126929",
@@ -127064,7 +127072,7 @@
     "status": "접수중",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "c12c3e1ddb75",
       "model": "claude-opus-5-5",
@@ -127125,7 +127133,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "PBLN_000000000126928": {
     "id": "PBLN_000000000126928",
@@ -127540,7 +127549,7 @@
     "status": "마감임박",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "8f620483b513",
       "model": "claude-opus-5-5",
@@ -127598,7 +127607,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "PBLN_000000000126922": {
     "id": "PBLN_000000000126922",
@@ -127731,7 +127741,7 @@
     "status": "마감임박",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "5f3f15415656",
       "model": "claude-opus-5-5",
@@ -127788,7 +127798,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "PBLN_000000000126919": {
     "id": "PBLN_000000000126919",
@@ -128193,7 +128204,7 @@
     "status": "마감임박",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "ef3c2ba73f3d",
       "model": "claude-opus-5-5",
@@ -128248,7 +128259,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "PBLN_000000000126903": {
     "id": "PBLN_000000000126903",
@@ -129442,7 +129454,7 @@
     "status": "마감임박",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "c33167052ac3",
       "model": "claude-opus-5-5",
@@ -129501,7 +129513,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "PBLN_000000000126879": {
     "id": "PBLN_000000000126879",
@@ -129636,7 +129649,7 @@
     "status": "마감임박",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "2c5e3b4fae11",
       "model": "claude-opus-5-5",
@@ -129696,7 +129709,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "PBLN_000000000126871": {
     "id": "PBLN_000000000126871",
@@ -130947,7 +130961,7 @@
     "status": "접수중",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "47614548badc",
       "model": "claude-opus-5-5",
@@ -131007,7 +131021,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "PBLN_000000000126844": {
     "id": "PBLN_000000000126844",
@@ -131040,7 +131055,7 @@
     "status": "마감임박",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "d5f5f777bc03",
       "model": "claude-opus-5-5",
@@ -131105,7 +131120,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "PBLN_000000000126842": {
     "id": "PBLN_000000000126842",
@@ -131328,7 +131344,7 @@
     "status": "마감임박",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "23b6102eff54",
       "model": "claude-opus-5-5",
@@ -131385,7 +131401,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "PBLN_000000000126834": {
     "id": "PBLN_000000000126834",
@@ -131696,7 +131713,7 @@
     "status": "접수중",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": null,
     "tier": "B",
     "gate": {
@@ -131712,7 +131729,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "PBLN_000000000126819": {
     "id": "PBLN_000000000126819",
@@ -132592,7 +132610,7 @@
     "status": "마감임박",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "1c090f1120e3",
       "model": "claude-opus-5-5",
@@ -132656,7 +132674,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "PBLN_000000000126802": {
     "id": "PBLN_000000000126802",
@@ -132689,7 +132708,7 @@
     "status": "접수중",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "1787ac50119d",
       "model": "claude-opus-5-5",
@@ -132745,7 +132764,8 @@
       "applyFails": 1,
       "detailFails": 0,
       "why": "신청: UND_ERR_CONNECT_TIMEOUT"
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "PBLN_000000000126801": {
     "id": "PBLN_000000000126801",
@@ -134653,7 +134673,7 @@
     "status": "상시",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "5f415624da49",
       "model": "claude-opus-5-5",
@@ -134725,7 +134745,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "PBLN_000000000126734": {
     "id": "PBLN_000000000126734",
@@ -135038,7 +135059,7 @@
     "status": "마감임박",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "ca161604eb33",
       "model": "claude-opus-5-5",
@@ -135101,7 +135122,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "PBLN_000000000126727": {
     "id": "PBLN_000000000126727",
@@ -137198,7 +137220,7 @@
     "status": "접수중",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "ac786109e504",
       "model": "claude-opus-5-5",
@@ -137257,7 +137279,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "PBLN_000000000126650": {
     "id": "PBLN_000000000126650",
@@ -138611,7 +138634,7 @@
     "status": "접수중",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": null,
     "tier": "B",
     "gate": {
@@ -138627,7 +138650,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "PBLN_000000000126597": {
     "id": "PBLN_000000000126597",
@@ -139821,7 +139845,7 @@
     "status": "마감임박",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "b08d5ab89a1b",
       "model": "claude-opus-5-5",
@@ -139886,7 +139910,8 @@
       "applyFails": 1,
       "detailFails": 0,
       "why": "신청: HTTP 500"
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "PBLN_000000000126501": {
     "id": "PBLN_000000000126501",
@@ -140775,7 +140800,7 @@
     "status": "마감임박",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "1fcc490d578d",
       "model": "claude-opus-5-5",
@@ -140831,7 +140856,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "PBLN_000000000126442": {
     "id": "PBLN_000000000126442",
@@ -141054,7 +141080,7 @@
     "status": "마감임박",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "36d2821f964a",
       "model": "claude-opus-5-5",
@@ -141120,7 +141146,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "PBLN_000000000126426": {
     "id": "PBLN_000000000126426",
@@ -162087,7 +162114,7 @@
     "status": "접수중",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "8fac4ce241d2",
       "model": "claude-opus-5-5",
@@ -162151,7 +162178,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "PBLN_000000000123095": {
     "id": "PBLN_000000000123095",
@@ -180296,7 +180324,7 @@
     "status": "접수중",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "9d8182b6ecc5",
       "model": "claude-opus-5-5",
@@ -180369,7 +180397,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "KS_179447": {
     "id": "KS_179447",
@@ -180404,7 +180433,7 @@
     "status": "접수중",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "32395ad48168",
       "model": "claude-opus-5-5",
@@ -180460,7 +180489,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "KS_179445": {
     "id": "KS_179445",
@@ -180495,7 +180525,7 @@
     "status": "접수중",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "ca36deaeb33a",
       "model": "claude-opus-5-5",
@@ -180551,7 +180581,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "KS_179442": {
     "id": "KS_179442",
@@ -181172,7 +181203,7 @@
     "status": "마감임박",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "e6dc18975b28",
       "model": "claude-opus-5-5",
@@ -181238,7 +181269,8 @@
       "applyFails": 1,
       "detailFails": 0,
       "why": "신청: HTTP 401"
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "KS_179435": {
     "id": "KS_179435",
@@ -182229,7 +182261,7 @@
     "status": "접수중",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "bf7b7463036a",
       "model": "claude-opus-5-5",
@@ -182298,7 +182330,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "KS_179424": {
     "id": "KS_179424",
@@ -182809,7 +182842,7 @@
     "status": "접수중",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "6f7282c6a604",
       "model": "claude-opus-5-5",
@@ -182870,7 +182903,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "KS_179418": {
     "id": "KS_179418",
@@ -183114,7 +183148,7 @@
     "status": "접수중",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "aab228258999",
       "model": "claude-opus-5-5",
@@ -183169,7 +183203,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "KS_179415": {
     "id": "KS_179415",
@@ -183302,7 +183337,7 @@
     "status": "마감임박",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "6c602dd727de",
       "model": "claude-opus-5-5",
@@ -183362,7 +183397,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "KS_179413": {
     "id": "KS_179413",
@@ -183397,7 +183433,7 @@
     "status": "접수중",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "13bebcd19d99",
       "model": "claude-opus-5-5",
@@ -183459,7 +183495,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "KS_179412": {
     "id": "KS_179412",
@@ -184203,7 +184240,7 @@
     "status": "마감임박",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "714d183503a2",
       "model": "claude-opus-5-5",
@@ -184262,7 +184299,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "KS_179399": {
     "id": "KS_179399",
@@ -184297,7 +184335,7 @@
     "status": "마감임박",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "5319907510a1",
       "model": "claude-opus-5-5",
@@ -184358,7 +184396,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "KS_179396": {
     "id": "KS_179396",
@@ -184916,7 +184955,7 @@
     "status": "접수중",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "85a7327078c8",
       "model": "claude-opus-5-5",
@@ -184978,7 +185017,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "KS_179387": {
     "id": "KS_179387",
@@ -185109,7 +185149,7 @@
     "status": "접수중",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "090ae1a3ade0",
       "model": "claude-opus-5-5",
@@ -185193,7 +185233,8 @@
       "applyFails": 1,
       "detailFails": 0,
       "why": "신청: HTTP 401"
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "KS_179385": {
     "id": "KS_179385",
@@ -185521,7 +185562,7 @@
     "status": "마감임박",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "c9f1ed73b908",
       "model": "claude-opus-5-5",
@@ -185582,7 +185623,8 @@
       "applyFails": 1,
       "detailFails": 0,
       "why": "신청: HTTP 401"
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "KS_179377": {
     "id": "KS_179377",
@@ -185800,7 +185842,7 @@
     "status": "접수중",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "1eb2a23f19d0",
       "model": "claude-opus-5-5",
@@ -185876,7 +185918,8 @@
       "applyFails": 1,
       "detailFails": 0,
       "why": "신청: HTTP 401"
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "KS_179374": {
     "id": "KS_179374",
@@ -187335,7 +187378,7 @@
     "status": "마감임박",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "433cd78f680d",
       "model": "claude-opus-5-5",
@@ -187400,7 +187443,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "KS_179353": {
     "id": "KS_179353",
@@ -187755,7 +187799,7 @@
     "status": "접수중",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "dc5f0a272df9",
       "model": "claude-opus-5-5",
@@ -187831,7 +187875,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "KS_179347": {
     "id": "KS_179347",
@@ -187981,7 +188026,7 @@
     "status": "마감임박",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "8e40dfff9c54",
       "model": "claude-opus-5-5",
@@ -188045,7 +188090,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "KS_179338": {
     "id": "KS_179338",
@@ -188798,7 +188844,7 @@
     "status": "마감임박",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "355fe7ec08c7",
       "model": "claude-opus-5-5",
@@ -188867,7 +188913,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "KS_179319": {
     "id": "KS_179319",
@@ -189292,7 +189339,7 @@
     "status": "접수중",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "dc8408f9eba5",
       "model": "claude-opus-5-5",
@@ -189355,7 +189402,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "KS_179306": {
     "id": "KS_179306",
@@ -189390,7 +189438,7 @@
     "status": "마감임박",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "463545d82ab9",
       "model": "claude-opus-5-5",
@@ -189456,7 +189504,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "KS_179302": {
     "id": "KS_179302",
@@ -189607,7 +189656,7 @@
     "status": "접수중",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "3c3484687ad3",
       "model": "claude-opus-5-5",
@@ -189700,7 +189749,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "KS_179295": {
     "id": "KS_179295",
@@ -190314,7 +190364,7 @@
     "status": "접수중",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "00d3d853caf3",
       "model": "claude-opus-5-5",
@@ -190388,7 +190438,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "KS_179280": {
     "id": "KS_179280",
@@ -190423,7 +190474,7 @@
     "status": "마감임박",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "f8891fcb3215",
       "model": "claude-opus-5-5",
@@ -190486,7 +190537,8 @@
       "applyFails": 1,
       "detailFails": 0,
       "why": "신청: HTTP 401"
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "KS_179268": {
     "id": "KS_179268",
@@ -190707,7 +190759,7 @@
     "status": "마감임박",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "322ec18fabb0",
       "model": "claude-opus-5-5",
@@ -190766,7 +190818,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "KS_179258": {
     "id": "KS_179258",
@@ -191008,7 +191061,7 @@
     "status": "접수중",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "4a7ced5c07aa",
       "model": "claude-opus-5-5",
@@ -191063,7 +191116,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "KS_179241": {
     "id": "KS_179241",
@@ -191206,7 +191260,7 @@
     "status": "접수중",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "27e01c183383",
       "model": "claude-opus-5-5",
@@ -191266,7 +191320,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "KS_179221": {
     "id": "KS_179221",
@@ -191301,7 +191356,7 @@
     "status": "마감임박",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "1c8c9a6b07db",
       "model": "claude-opus-5-5",
@@ -191361,7 +191416,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "KS_179218": {
     "id": "KS_179218",
@@ -191902,7 +191958,7 @@
     "status": "접수중",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "5ab42db7cdbc",
       "model": "claude-opus-5-5",
@@ -191965,7 +192021,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "KS_179195": {
     "id": "KS_179195",
@@ -192499,7 +192556,7 @@
     "status": "마감임박",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "8aa201e21a89",
       "model": "claude-opus-5-5",
@@ -192566,7 +192623,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "KS_179115": {
     "id": "KS_179115",
@@ -193016,7 +193074,7 @@
     "status": "접수중",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "32a22b87b42a",
       "model": "claude-opus-5-5",
@@ -193076,7 +193134,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "KS_179009": {
     "id": "KS_179009",
@@ -195262,7 +195321,7 @@
     "status": "접수중",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "a46f00f72174",
       "model": "claude-opus-5-5",
@@ -195321,7 +195380,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "KS_178023": {
     "id": "KS_178023",
@@ -196442,7 +196502,7 @@
     "status": "접수중",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "4b25beee330f",
       "model": "claude-opus-5-5",
@@ -196520,7 +196580,8 @@
       "applyFails": 1,
       "detailFails": 0,
       "why": "신청: HTTP 401"
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "KS_177563": {
     "id": "KS_177563",
@@ -198449,7 +198510,7 @@
     "status": "접수중",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "34b10908a594",
       "model": "claude-opus-5-5",
@@ -198514,7 +198575,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "KS_176782": {
     "id": "KS_176782",
@@ -199446,7 +199508,7 @@
     "status": "접수중",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "a0e0bed7871c",
       "model": "claude-opus-5-5",
@@ -199506,7 +199568,8 @@
       "detail": "ok",
       "applyFails": 0,
       "detailFails": 0
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "KS_176378": {
     "id": "KS_176378",
@@ -199541,7 +199604,7 @@
     "status": "접수중",
     "firstSeen": "2026-10-09",
     "lastSeen": "2026-10-09",
-    "removed": false,
+    "removed": true,
     "ai": {
       "hash": "a41c65d75386",
       "model": "claude-opus-5-5",
@@ -199603,7 +199666,8 @@
       "applyFails": 1,
       "detailFails": 0,
       "why": "신청: HTTP 401"
-    }
+    },
+    "removedAt": "2026-10-09"
   },
   "KS_176316": {
     "id": "KS_176316",
