@@ -10,9 +10,14 @@ import path from 'node:path';
 import config from '../config.js';
 import { ruleRegion, ruleSupportTypes, ruleTargets, ruleMaxAmount } from './lib/classify.js';
 import { legalPages } from './site/legal.js';
-import { ROOT, SITE_DIR, loadItems, todayKST, fmtDateKo, daysBetween, esc, log } from './lib/util.js';
+import { ROOT, SITE_DIR, loadItems, todayKST, fmtDateKo, daysBetween, esc, log, hash } from './lib/util.js';
 
 const { site, taxonomy, filter, sources: SRC } = config;
+// 브라우저가 옛 CSS/JS를 캐시해서 바뀐 게 안 보이는 일을 막기 위해 파일 내용 해시를 주소에 붙인다 (내용이 바뀌면 주소도 바뀜)
+const ASSET_V = {
+  css: hash(fs.readFileSync(path.join(ROOT, 'src', 'site', 'style.css'))),
+  js: hash(fs.readFileSync(path.join(ROOT, 'src', 'site', 'app.js'))),
+};
 const srcLabel = (s) => SRC[s]?.label ?? '정부24';
 // 공지사항: 저장소 루트의 notice.md (주석 빼고 비어 있으면 안 띄움). 첫 줄 "# 제목", 빈 줄로 문단, [글자](주소)·맨주소는 링크
 function renderNotice() {
@@ -115,7 +120,7 @@ function layout({ title, description, body, rel = '', canonical = '', scripts = 
 <meta property="og:locale" content="ko_KR">
 ${canonical ? `<link rel="canonical" href="${esc(canonical)}">` : ''}
 ${FONT}
-<link rel="stylesheet" href="${rel}assets/style.css">
+<link rel="stylesheet" href="${rel}assets/style.css?v=${ASSET_V.css}">
 </head>
 <body>
 <header class="header"><div class="wrap">
@@ -178,7 +183,7 @@ ${isSample ? '<div class="sample-banner">지금 보이는 건 샘플 데이터�
 <section id="grid"></section>
 <button class="more" id="more" hidden>더 보기</button>
 <script id="data" type="application/json">${JSON.stringify(data).replace(/</g, '\\u003c')}</script>`;
-  return layout({ title: `${site.name} | ${site.cafeName} 카페`, description: site.description, body, canonical: site.url ? `${site.url}/` : '', scripts: '<script src="assets/app.js"></script>' });
+  return layout({ title: `${site.name} | ${site.cafeName} 카페`, description: site.description, body, canonical: site.url ? `${site.url}/` : '', scripts: `<script src="assets/app.js?v=${ASSET_V.js}"></script>` });
 }
 
 // ── 상세 페이지 ──
