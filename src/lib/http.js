@@ -44,13 +44,32 @@ export function findArray(obj, depth = 0) {
   return null;
 }
 
+/** HTML 엔티티 풀기 — 두 번 인코딩된 것(&amp;amp;)도 끝까지 */
+export function decodeEntities(s) {
+  let t = String(s ?? '');
+  for (let i = 0; i < 3; i++) {
+    const n = t.replace(/&nbsp;/g, ' ').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;|&apos;/g, "'")
+      .replace(/&#(\d+);/g, (_, d) => String.fromCodePoint(Number(d))).replace(/&amp;/g, '&');
+    if (n === t) break;
+    t = n;
+  }
+  return t;
+}
+
 /** HTML 태그·엔티티 제거 (기업마당 요약 필드에 HTML이 섞여 옴) */
 export function stripHtml(s) {
-  return String(s ?? '')
-    .replace(/<br\s*\/?>/gi, '\n').replace(/<\/(p|div|li|tr|h\d)>/gi, '\n').replace(/<[^>]+>/g, '')
-    .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;|&apos;/g, "'")
-    .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n)))
+  return decodeEntities(String(s ?? '')
+    .replace(/<br\s*\/?>/gi, '\n').replace(/<\/(p|div|li|tr|h\d)>/gi, '\n').replace(/<[^>]+>/g, ''))
     .replace(/[ \t]+\n/g, '\n').replace(/\n{3,}/g, '\n\n').trim();
+}
+
+/** "0428629583" → "042-862-9583" (이미 하이픈이 있거나 숫자가 아니면 그대로) */
+export function formatPhone(v) {
+  const s = String(v ?? '').trim();
+  if (!/^\d{8,11}$/.test(s)) return s;
+  if (s.startsWith('02')) return s.length === 9 ? `02-${s.slice(2, 5)}-${s.slice(5)}` : `02-${s.slice(2, 6)}-${s.slice(6)}`;
+  if (s.length === 8) return `${s.slice(0, 4)}-${s.slice(4)}`;
+  return s.length === 10 ? `${s.slice(0, 3)}-${s.slice(3, 6)}-${s.slice(6)}` : `${s.slice(0, 3)}-${s.slice(3, 7)}-${s.slice(7)}`;
 }
 
 /** "20260131" / "2026-01-31 10:00:00" / "2026.01.31" → "2026-01-31" (못 읽으면 '') */

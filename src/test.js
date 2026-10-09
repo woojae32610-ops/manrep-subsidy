@@ -78,5 +78,20 @@ assert.equal(ks.서비스분야, '고용·창업'); assert.equal(ks.지역, '전
 assert.equal(kstartup.mapRow({ pbanc_sn: '1', biz_pbanc_nm: 'x', rcrt_prgs_yn: 'N' }, T), null, '모집 종료는 제외');
 assert.equal(kstartup.mapRow({ pbanc_sn: '2', biz_pbanc_nm: 'x', pbanc_rcpt_end_dt: '20260101' }, T), null, '마감 지난 건 제외');
 assert.equal(kstartup.mapRow({ pbanc_sn: '3', biz_pbanc_nm: '딥테크 팁스 모집' }, T), null, '딥테크·팁스 제외');
+// 실제 응답에서 확인된 특이점: URL 엔티티 중복(&amp;amp;), 전화번호 하이픈 없음, 연령 전체 나열, 접수방법 aply_mthd_*
+const { formatPhone, decodeEntities } = await import('./lib/http.js');
+assert.equal(decodeEntities('a?x=1&amp;amp;y=2&amp;z=3'), 'a?x=1&y=2&z=3');
+assert.equal(formatPhone('0428629583'), '042-862-9583'); assert.equal(formatPhone('021234567'), '02-123-4567'); assert.equal(formatPhone('1357'), '1357'); assert.equal(formatPhone('041-404-1332'), '041-404-1332');
+const bz2 = bizinfo.mapRow({ pblancId: 'PBLN_000000000127088', pblancNm: '[충남] 2026년 디지털콘텐츠 제작지원 모집 공고', pldirSportRealmLclasCodeNm: '내수', trgetNm: '소상공인', hashtags: '내수,경영,충남,2026',
+  reqstBeginEndDe: '2026-10-01 ~ 2026-10-23', creatPnttm: '2026-10-08 14:07:33', updtPnttm: '2026-10-08 15:22:02', rceptEngnHmpgUrl: 'https://fanfandaero.kr/x.do?a=1&amp;amp;b=2',
+  bsnsSumryCn: '<p>충남경제진흥원에서는 도내 소상공인을 대상으로 모집합니다.</p><p><br></p><p>☞ 온라인 판매 희망 소상공인</p>' });
+assert.equal(bz2.온라인신청사이트URL, 'https://fanfandaero.kr/x.do?a=1&b=2');
+assert.equal(bz2.서비스목적요약, '충남경제진흥원에서는 도내 소상공인을 대상으로 모집합니다.');
+assert.ok(bz2.지원내용.includes('☞ 온라인 판매 희망 소상공인'));
+assert.equal(bz2.지역, '충남'); assert.equal(bz2.수정일시, '2026-10-08'); assert.equal(bz2.신청기한, '2026-10-01 ~ 2026-10-23');
+const ks2 = kstartup.mapRow({ pbanc_sn: '179466', biz_pbanc_nm: '2026년 전북 초기창업 참가기업 모집', pbanc_ntrp_nm: '(주)로우파트너스', sprv_inst: '민간', prch_cnpl_no: '0428629583',
+  biz_trgt_age: '만 20세 미만,만 20세 이상 ~ 만 39세 이하,만 40세 이상', aply_mthd_onli_rcpt_istc: 'https://forms.example/1', biz_aply_url: null, rcrt_prgs_yn: 'Y', pbanc_rcpt_end_dt: '20261020', id: 1 }, T);
+assert.equal(ks2.서비스ID, 'KS_179466'); assert.equal(ks2.소관기관명, '(주)로우파트너스'); assert.equal(ks2.문의처, '042-862-9583');
+assert.ok(!ks2.지원대상.includes('연령'), '전 연령 나열은 생략'); assert.equal(ks2.온라인신청사이트URL, 'https://forms.example/1'); assert.equal(ks2.신청방법, '온라인: https://forms.example/1');
 console.log('✓ 어댑터 테스트 통과');
 console.log('✓ 테스트 통과');

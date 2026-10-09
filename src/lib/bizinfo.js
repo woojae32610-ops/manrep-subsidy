@@ -5,7 +5,7 @@
 //   (문서가 빈약해서 필드명은 방어적으로 읽고, --probe 로 실제 응답을 확인한 뒤 보정)
 // 정부24는 "제도" 단위라 기한이 없는 게 많고, 기업마당은 "모집공고" 단위라 접수기간이 있다.
 import config from '../../config.js';
-import { getJson, findArray, stripHtml, toIsoDate, pick } from './http.js';
+import { getJson, findArray, stripHtml, decodeEntities, toIsoDate, pick } from './http.js';
 import { clean, hasAny, log } from './util.js';
 
 const C = config.sources.bizinfo;
@@ -35,7 +35,7 @@ export async function fetchPage({ pageUnit = C.pageUnit, pageIndex = 1 } = {}) {
   return { rows, json };
 }
 
-const abs = (u) => { const s = clean(u); return !s ? '' : s.startsWith('/') ? HOST + s : s; };
+const abs = (u) => { const s = clean(decodeEntities(u)); return !s ? '' : s.startsWith('/') ? HOST + s : s; };
 const registeredAt = (r) => toIsoDate(pick(r, ['creatPnttm', 'creatDt', 'registDt', 'frstRegistPnttm']));
 
 /** "20260101 ~ 20260131" → "2026-01-01 ~ 2026-01-31" (dates.js 가 읽을 수 있는 꼴로) */
@@ -97,15 +97,16 @@ export function mapRow(r) {
   const tags = clean(pick(r, ['hashTags', 'hashtags']));
   if (C.excludeFields.includes(field)) return null;
   if (hasAny(name, C.excludeNames)) return null;
-  const summary = stripHtml(pick(r, ['bsnsSumryCn', 'bsnsSumryCN']));
+  const body = stripHtml(pick(r, ['bsnsSumryCn', 'bsnsSumryCN']));   // 공고 본문(HTML) — 첫 문단은 요약으로, 전체는 지원내용으로
+  const firstPara = body.split(/\n+/).find((l) => l.trim().length > 10) ?? body;
   const all = `${name} ${target} ${tags}`;
   const smallBiz = hasAny(all, config.filter.strong);
   return {
     서비스ID: id,
-    서비스명: name,
-    서비스목적요약: summary,
+    서비스명: decodeEntities(name),
+    서비스목적요약: firstPara.slice(0, 300),
     지원대상: target,
-    지원내용: '',
+    지원내용: body,
     지원유형: [field, sub].filter(Boolean).join(' > '),
     신청기한: formatPeriod(pick(r, ['reqstBeginEndDe', 'reqstDe'])),
     신청방법: stripHtml(pick(r, ['reqstMthPapersCn'])),
@@ -118,6 +119,7 @@ export function mapRow(r) {
     서비스분야: field === '창업' ? '고용·창업' : `기업지원·${field || '기타'}`,
     지역: regionsFromTags(tags),
     해시태그: tags,
-    수정일시: registeredAt(r),
+    출처: '기업마당',
+    수정일시: toIsoDate(pick(r, ['updtPnttm'])) || registeredAt(r),
   };
 }
