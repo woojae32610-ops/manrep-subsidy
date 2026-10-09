@@ -2,6 +2,6 @@ node_modules/
 .env
 .env.bak
 .env.tmp
-data/raw/
-site/
+/data/raw/
+/site/
 *.log

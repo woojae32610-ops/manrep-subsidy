@@ -8,7 +8,7 @@ const { base, perPage, maxPages, timeoutMs } = config.gov24;
 
 async function get(op, params) {
   const url = new URL(`${base}/${op}`);
-  url.searchParams.set('serviceKey', process.env.GOV24_API_KEY);
+  url.searchParams.set('serviceKey', String(process.env.GOV24_API_KEY ?? '').trim()); // 시크릿에 공백·줄바꿈이 섞여 들어와도 안전하게
   url.searchParams.set('returnType', 'JSON');
   for (const [k, v] of Object.entries(params)) url.searchParams.set(k, String(v));
 

@@ -19,6 +19,11 @@ import {
 
 loadEnv();
 const today = todayKST();
+// 자동 실행(GitHub Actions 등 CI)에서 키가 없으면 샘플 모드로 빠져 실제 데이터를 덮어쓰면 안 되므로 바로 멈춘다
+if (process.env.CI && !process.env.GOV24_API_KEY && !argFlag('--sample')) {
+  console.error('✖ GOV24_API_KEY 가 없습니다. GitHub 저장소 Settings → Secrets and variables → Actions 에 등록하세요.');
+  process.exit(1);
+}
 const useSample = argFlag('--sample') || !process.env.GOV24_API_KEY;
 const useRaw = argFlag('--raw'); // data/raw/ 스냅샷 재사용 (API 안 부르고 필터·파싱만 다시)
 

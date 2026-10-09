@@ -69,7 +69,7 @@ if (!process.env.ANTHROPIC_API_KEY) {
 
 const { default: Anthropic } = await import('@anthropic-ai/sdk');
 const { jsonSchemaOutputFormat } = await import('@anthropic-ai/sdk/helpers/json-schema');
-const client = new Anthropic({ maxRetries: 4 });
+const client = new Anthropic({ apiKey: String(process.env.ANTHROPIC_API_KEY).trim(), maxRetries: 4 });
 const priceOf = (m) => config.llm.price[m] ?? { in: 0, out: 0 };
 const usage = { gate: { in: 0, out: 0 }, full: { in: 0, out: 0 } };
 
