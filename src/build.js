@@ -38,6 +38,7 @@ const BRAND_DIR = path.join(ROOT, 'src', 'site', 'brand');
 const brandAsset = (name) => (name && fs.existsSync(path.join(BRAND_DIR, name))) ? `assets/brand/${name}` : null;
 const logoImg = brandAsset(site.brand?.logo);
 const bannerImg = brandAsset(site.brand?.banner);
+const bannerMobileImg = brandAsset(site.brand?.bannerMobile);
 const today = todayKST();
 const items = Object.values(loadItems());
 if (!items.length) { console.error('✖ data/items.json 이 비어 있어요. 먼저 node src/collect.js (또는 --sample)'); process.exit(1); }
@@ -153,7 +154,7 @@ function indexPage() {
 <section class="cafeband">
   <a class="cafeband-link" href="${esc(site.cafeUrl)}" target="_blank" rel="noopener" aria-label="${esc(site.cafeName)} 카페 바로가기">
     ${bannerImg
-      ? `<img src="${bannerImg}" alt="${esc(cb.title ?? site.cafeName)}">`
+      ? `<picture>${bannerMobileImg ? `<source media="(max-width: 560px)" srcset="${bannerMobileImg}">` : ''}<img src="${bannerImg}" alt="${esc(cb.title ?? site.cafeName)}"></picture>`
       : `<div class="cafeband-text">${logoImg ? `<img class="cafeband-emblem-img" src="${logoImg}" alt="">` : '<div class="cafeband-emblem">만</div>'}<div><b>${esc(cb.title ?? site.cafeName)}</b><p>${esc(cb.text ?? '')}</p></div></div>`}
     <span class="cafeband-btn">${esc(cb.button ?? '카페 바로가기')} →</span>
   </a>

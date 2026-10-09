@@ -21,6 +21,7 @@ export default {
     brand: {
       logo: 'logo.png',           // 헤더 왼쪽 캐릭터/로고 (권장 높이 40px 기준, 정사각형 PNG)
       banner: 'cafe-banner.png',  // 맨 위 카페 배너 (가로형, 권장 1200×300 안팎)
+      bannerMobile: 'cafe-banner-m.png', // 폰용 배너 (선택, 800×400쯤 — 글자 크게). 있으면 폰에서 이걸로 바꿔 보여줌
     },
     // 맨 위 카페 배너 문구 (이미지가 없을 때 글자 배너로 표시, 버튼은 항상 표시)
     cafeBanner: {
