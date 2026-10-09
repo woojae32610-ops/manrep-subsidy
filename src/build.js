@@ -9,10 +9,16 @@ import fs from 'node:fs';
 import path from 'node:path';
 import config from '../config.js';
 import { ruleRegion, ruleSupportTypes, ruleTargets, ruleMaxAmount } from './lib/classify.js';
+import { legalPages } from './site/legal.js';
 import { ROOT, SITE_DIR, loadItems, todayKST, fmtDateKo, daysBetween, esc, log } from './lib/util.js';
 
 const { site, taxonomy, filter, sources: SRC } = config;
 const srcLabel = (s) => SRC[s]?.label ?? '정부24';
+// 브랜드 이미지(캐릭터·배너): src/site/brand/ 에 파일이 있을 때만 씀
+const BRAND_DIR = path.join(ROOT, 'src', 'site', 'brand');
+const brandAsset = (name) => (name && fs.existsSync(path.join(BRAND_DIR, name))) ? `assets/brand/${name}` : null;
+const logoImg = brandAsset(site.brand?.logo);
+const bannerImg = brandAsset(site.brand?.banner);
 const today = todayKST();
 const items = Object.values(loadItems());
 if (!items.length) { console.error('✖ data/items.json 이 비어 있어요. 먼저 node src/collect.js (또는 --sample)'); process.exit(1); }
@@ -93,7 +99,7 @@ ${FONT}
 </head>
 <body>
 <header class="header"><div class="wrap">
-  <a class="logo" href="${rel}index.html"><span class="mark">만</span>${esc(site.name)}</a>
+  <a class="logo" href="${rel}index.html">${logoImg ? `<img class="brandimg" src="${rel}${logoImg}" alt="">` : '<span class="mark">만</span>'}<span class="brandname">${esc(site.name)}</span></a>
   <a class="cafe" href="${esc(site.cafeUrl)}" target="_blank" rel="noopener">☕ <span>${esc(site.cafeName)} 카페</span></a>
 </div></header>
 <main class="wrap">
@@ -102,7 +108,7 @@ ${body}
 <footer class="footer"><div class="wrap">
   <b>이 사이트에 대해</b><br>
   ${esc(site.name)}은 ${esc(site.cafeName)} 카페가 회원 사장님들을 위해 운영하는 안내 페이지입니다. 공고 데이터는 ${esc(sourceNames)}의 공공데이터(이용 제한 없음)를 매일 자동으로 받아오고, 요약과 체크리스트는 AI가 작성한 뒤 숫자를 원문과 대조합니다. 그래도 틀린 부분이 있을 수 있으니 신청 자격·금액·기한은 각 페이지의 <b>공고 원문</b>과 <b>접수 기관</b>에서 마지막으로 확인해 주세요. ${esc(site.contactNote)}
-  <div class="links"><a href="${esc(site.cafeUrl)}" target="_blank" rel="noopener">${esc(site.cafeName)} 카페</a> · <span>출처: ${esc(sourceNames)}</span></div>
+  <div class="links"><a href="${rel}terms.html">이용약관</a> · <a href="${rel}privacy.html">개인정보처리방침</a> · <a href="${esc(site.cafeUrl)}" target="_blank" rel="noopener">${esc(site.cafeName)} 카페</a> · <span>출처: ${esc(sourceNames)}</span></div>
   <div style="margin-top:10px">© ${today.slice(0, 4)} ${esc(site.name)}</div>
 </div></footer>
 ${scripts}
@@ -124,10 +130,20 @@ function indexPage() {
     collectedAt, taxonomy, core: CORE,
     items: visible.map(({ src, checklist, cautions, who, what, ...rest }) => rest),
   };
+  const cb = site.cafeBanner ?? {};
+  const banner = `
+<section class="cafeband">
+  <a class="cafeband-link" href="${esc(site.cafeUrl)}" target="_blank" rel="noopener" aria-label="${esc(site.cafeName)} 카페 바로가기">
+    ${bannerImg
+      ? `<img src="${bannerImg}" alt="${esc(cb.title ?? site.cafeName)}">`
+      : `<div class="cafeband-text">${logoImg ? `<img class="cafeband-emblem-img" src="${logoImg}" alt="">` : '<div class="cafeband-emblem">만</div>'}<div><b>${esc(cb.title ?? site.cafeName)}</b><p>${esc(cb.text ?? '')}</p></div></div>`}
+    <span class="cafeband-btn">${esc(cb.button ?? '카페 바로가기')} →</span>
+  </a>
+</section>`;
   const body = `
-<section class="hero">
-  <h1>전국 소상공인 지원사업, 한눈에</h1>
-  <p>${esc(site.tagline)}</p>
+${banner}
+<section class="hero compact">
+  <div><h1>전국 소상공인 지원사업, 한눈에</h1><p>${esc(site.tagline)}</p></div>
   <div class="meta"><span>공고 수집 ${esc(fmtDateKo(collectedAt))}</span><span>사장님 대상 ${core.length}건</span><span>출처 ${esc(sourceLabels)}</span></div>
 </section>
 ${isSample ? '<div class="sample-banner">지금 보이는 건 샘플 데이터예요. 정부24 API 키를 .env 에 넣고 다시 수집하면 실제 공고로 바뀝니다.</div>' : ''}
@@ -247,12 +263,18 @@ for (const f of fs.readdirSync(path.join(SITE_DIR, 's'))) {
 }
 fs.mkdirSync(path.join(SITE_DIR, 'assets'), { recursive: true });
 for (const f of ['style.css', 'app.js']) fs.copyFileSync(path.join(ROOT, 'src', 'site', f), path.join(SITE_DIR, 'assets', f));
+if (fs.existsSync(BRAND_DIR)) {
+  fs.mkdirSync(path.join(SITE_DIR, 'assets', 'brand'), { recursive: true });
+  for (const f of fs.readdirSync(BRAND_DIR)) if (/\.(png|jpe?g|svg|webp|gif)$/i.test(f)) fs.copyFileSync(path.join(BRAND_DIR, f), path.join(SITE_DIR, 'assets', 'brand', f));
+}
+const legal = legalPages({ site, sourceNames, today });
+for (const pg of legal) fs.writeFileSync(path.join(SITE_DIR, pg.file), layout({ title: `${pg.title} | ${site.name}`, description: pg.description, body: `<article class="card legal">${pg.body}</article>`, canonical: site.url ? `${site.url}/${pg.file}` : '' }), 'utf8');
 fs.writeFileSync(path.join(SITE_DIR, 'index.html'), indexPage(), 'utf8');
 for (const p of [...visible, ...expiredKeep]) fs.writeFileSync(path.join(SITE_DIR, 's', `${p.id}.html`), detailPage(p), 'utf8');
 fs.writeFileSync(path.join(SITE_DIR, 'data.json'), JSON.stringify({ collectedAt, items: visible.map(({ src, ...rest }) => rest) }, null, 2), 'utf8');
 fs.writeFileSync(path.join(SITE_DIR, 'robots.txt'), `User-agent: *\nAllow: /\n${site.url ? `Sitemap: ${site.url}/sitemap.xml\n` : ''}`, 'utf8');
 if (site.url) {
-  const urls = ['', ...visible.map((p) => p.url)].map((u) => `<url><loc>${esc(site.url)}/${u}</loc><lastmod>${today}</lastmod></url>`).join('\n');
+  const urls = ['', ...legal.map((pg) => pg.file), ...visible.map((p) => p.url)].map((u) => `<url><loc>${esc(site.url)}/${u}</loc><lastmod>${today}</lastmod></url>`).join('\n');
   fs.writeFileSync(path.join(SITE_DIR, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`, 'utf8');
 }
 fs.writeFileSync(path.join(SITE_DIR, '.nojekyll'), '', 'utf8');

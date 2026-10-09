@@ -12,6 +12,19 @@ export default {
     cafeUrl: 'https://cafe.naver.com/whduddn0317',
     cafeName: '만렙사장',
     contactNote: '잘못된 내용을 발견하시면 카페로 알려주세요. 바로 고치겠습니다.',
+    // 이미지: src/site/brand/ 폴더에 이 이름으로 파일을 넣으면 자동으로 쓰임 (없으면 글자로 대체)
+    brand: {
+      logo: 'logo.png',           // 헤더 왼쪽 캐릭터/로고 (권장 높이 40px 기준, 정사각형 PNG)
+      banner: 'cafe-banner.png',  // 맨 위 카페 배너 (가로형, 권장 1200×300 안팎)
+    },
+    // 맨 위 카페 배너 문구 (이미지가 없을 때 글자 배너로 표시, 버튼은 항상 표시)
+    cafeBanner: {
+      title: '만렙사장 카페',
+      text: '전국 사장님들이 장사 이야기와 지원사업 정보를 나누는 곳이에요. 궁금한 건 카페에서 물어보세요.',
+      button: '카페 바로가기',
+    },
+    // 이용약관·개인정보처리방침 (site/terms.html, site/privacy.html) — 문구는 src/site/legal.js
+    legal: { effective: '2026-10-09', operator: '만렙사장 카페 운영진' },
   },
 
   gov24: {
