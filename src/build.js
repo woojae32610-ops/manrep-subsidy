@@ -90,8 +90,8 @@ ${FONT}
 ${body}
 </main>
 <footer class="footer"><div class="wrap">
-  <b>면책 고지</b><br>
-  ${esc(site.name)}은 공개된 정부·공공 지원사업 공고(정부24 공공서비스 정보)를 사장님이 이해하기 쉬운 형태로 다시 정리한 참고용 정보입니다. 요약과 체크리스트는 AI가 작성한 것으로 오류가 있을 수 있습니다. 최종 판단과 신청은 반드시 각 공고의 <b>원문</b>과 <b>발행 기관</b> 안내를 따라 주세요. 공고 조건·금액·기한은 사전 고지 없이 바뀔 수 있습니다. ${esc(site.contactNote)}
+  <b>이 사이트에 대해</b><br>
+  ${esc(site.name)}은 ${esc(site.cafeName)} 카페가 회원 사장님들을 위해 운영하는 안내 페이지입니다. 공고 데이터는 행정안전부 정부24 공공서비스 정보(공공데이터, 이용 제한 없음)를 매일 자동으로 받아오고, 요약과 체크리스트는 AI가 작성한 뒤 숫자를 원문과 대조합니다. 그래도 틀린 부분이 있을 수 있으니 신청 자격·금액·기한은 각 페이지의 <b>공고 원문</b>과 <b>접수 기관</b>에서 마지막으로 확인해 주세요. ${esc(site.contactNote)}
   <div class="links"><a href="${esc(site.cafeUrl)}" target="_blank" rel="noopener">${esc(site.cafeName)} 카페</a> · <span>출처: 정부24 공공서비스 정보(행정안전부)</span></div>
   <div style="margin-top:10px">© ${today.slice(0, 4)} ${esc(site.name)}</div>
 </div></footer>
@@ -117,7 +117,7 @@ function indexPage() {
   const body = `
 <section class="hero">
   <h1>전국 소상공인 지원사업, 한눈에</h1>
-  <p>${esc(site.tagline)} — 자격 체크리스트와 마감일까지 쉬운 말로 정리했어요.</p>
+  <p>${esc(site.tagline)}</p>
   <div class="meta"><span>공고 수집 ${esc(fmtDateKo(collectedAt))}</span><span>총 ${visible.length}건</span><span>출처 정부24</span></div>
 </section>
 ${isSample ? '<div class="sample-banner">지금 보이는 건 샘플 데이터예요. 정부24 API 키를 .env 에 넣고 다시 수집하면 실제 공고로 바뀝니다.</div>' : ''}
@@ -132,7 +132,7 @@ ${isSample ? '<div class="sample-banner">지금 보이는 건 샘플 데이터�
 <section id="grid"></section>
 <button class="more" id="more" hidden>더 보기</button>
 <script id="data" type="application/json">${JSON.stringify(data).replace(/</g, '\\u003c')}</script>`;
-  return layout({ title: `${site.name} | 사장님이 받을 수 있는 지원금, 한눈에`, description: site.description, body, canonical: site.url ? `${site.url}/` : '', scripts: '<script src="assets/app.js"></script>' });
+  return layout({ title: `${site.name} | 소상공인 지원사업 한눈에 보기`, description: site.description, body, canonical: site.url ? `${site.url}/` : '', scripts: '<script src="assets/app.js"></script>' });
 }
 
 // ── 상세 페이지 ──
