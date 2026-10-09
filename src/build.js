@@ -14,6 +14,21 @@ import { ROOT, SITE_DIR, loadItems, todayKST, fmtDateKo, daysBetween, esc, log }
 
 const { site, taxonomy, filter, sources: SRC } = config;
 const srcLabel = (s) => SRC[s]?.label ?? '정부24';
+// 공지사항: 저장소 루트의 notice.md (주석 빼고 비어 있으면 안 띄움). 첫 줄 "# 제목", 빈 줄로 문단, [글자](주소)·맨주소는 링크
+function renderNotice() {
+  let md = '';
+  try { md = fs.readFileSync(path.join(ROOT, 'notice.md'), 'utf8'); } catch { return ''; }
+  const text = md.replace(/<!--[\s\S]*?-->/g, '').trim();
+  if (!text) return '';
+  const lines = text.split(/\r?\n/);
+  const title = /^#\s+/.test(lines[0]) ? lines.shift().replace(/^#\s+/, '').trim() : '';
+  const inline = (s) => esc(s)
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
+    .replace(/(^|[^"'>])(https?:\/\/[^\s<]+)/g, '$1<a href="$2" target="_blank" rel="noopener">$2</a>');
+  const paras = lines.join('\n').split(/\n{2,}/).map((p) => p.trim()).filter(Boolean).map((p) => `<p>${inline(p).replace(/\n/g, '<br>')}</p>`);
+  return `<section class="notice"><span class="nlabel">공지</span><div class="nbody">${title ? `<b>${esc(title)}</b>` : ''}${paras.join('')}</div></section>`;
+}
+
 // 문의 창구 링크 (카페 문의·신고 게시판)
 const contactUrl = site.contact?.url || site.cafeUrl;
 const contactLink = `<a href="${esc(contactUrl)}" target="_blank" rel="noopener">${esc(site.cafeName)} 카페 ${esc(site.contact?.name ?? '')}</a>`.replace(/\s+<\/a>/, '</a>');
@@ -145,6 +160,7 @@ function indexPage() {
 </section>`;
   const body = `
 ${banner}
+${renderNotice()}
 <section class="hero compact">
   <div><h1>전국 소상공인 지원사업, 한눈에</h1><p>${esc(site.tagline)}</p></div>
   <div class="meta"><span>공고 수집 ${esc(fmtDateKo(collectedAt))}</span><span>사장님 대상 ${core.length}건</span><span>출처 ${esc(sourceLabels)}</span></div>

@@ -60,6 +60,15 @@ button { font: inherit; cursor: pointer; }
 .hero p { margin: 0; opacity: .92; font-size: 17px; }
 .hero .meta { margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap; font-size: 14.5px; }
 .hero .meta span { background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.22); padding: 5px 10px; border-radius: 999px; }
+/* 공지사항 (notice.md) */
+.notice { margin: 14px 0 0; padding: 16px 20px; border-radius: 14px; background: #fff7d6; border: 1px solid #f3dd8a; color: #4a3800; display: flex; gap: 14px; align-items: flex-start; }
+.notice .nlabel { flex-shrink: 0; font-size: 13.5px; font-weight: 800; color: #fff; background: #e8590c; padding: 4px 10px; border-radius: 999px; margin-top: 2px; }
+.notice .nbody { min-width: 0; font-size: 16px; line-height: 1.6; }
+.notice .nbody b { display: block; font-size: 18px; margin-bottom: 4px; color: #3a2a00; }
+.notice .nbody p { margin: 0 0 6px; }
+.notice .nbody p:last-child { margin-bottom: 0; }
+.notice a { color: var(--primary); font-weight: 600; text-decoration: underline; }
+
 /* 작은 히어로: 배너가 위에 있으니 한 줄 요약만 */
 .hero.compact { margin: 14px 0; padding: 16px 22px; border-radius: 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px 18px; flex-wrap: wrap; box-shadow: 0 8px 20px rgba(43, 92, 230, .18); }
 .hero.compact h1 { font-size: 21px; margin: 0 0 3px; }
