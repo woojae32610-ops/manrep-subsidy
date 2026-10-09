@@ -160,12 +160,12 @@ function indexPage() {
   </a>
 </section>`;
   const body = `
-${banner}
-${renderNotice()}
 <section class="hero compact">
-  <div><h1>전국 소상공인 지원사업, 한눈에</h1><p>${esc(site.tagline)}</p></div>
+  <div><h1>${esc(site.heroTitle || '전국 소상공인 지원사업, 한눈에')}</h1>${site.heroText ? `<p>${esc(site.heroText)}</p>` : ''}</div>
   <div class="meta"><span>공고 수집 ${esc(fmtDateKo(collectedAt))}</span><span>사장님 대상 ${core.length}건</span><span>출처 ${esc(sourceLabels)}</span></div>
 </section>
+${renderNotice()}
+${banner}
 ${isSample ? '<div class="sample-banner">지금 보이는 건 샘플 데이터예요. 정부24 API 키를 .env 에 넣고 다시 수집하면 실제 공고로 바뀝니다.</div>' : ''}
 <section class="stats">${stats}</section>
 <section class="card filters">
@@ -178,7 +178,7 @@ ${isSample ? '<div class="sample-banner">지금 보이는 건 샘플 데이터�
 <section id="grid"></section>
 <button class="more" id="more" hidden>더 보기</button>
 <script id="data" type="application/json">${JSON.stringify(data).replace(/</g, '\\u003c')}</script>`;
-  return layout({ title: `${site.name} | 소상공인 지원사업 한눈에 보기`, description: site.description, body, canonical: site.url ? `${site.url}/` : '', scripts: '<script src="assets/app.js"></script>' });
+  return layout({ title: `${site.name} | ${site.cafeName} 카페`, description: site.description, body, canonical: site.url ? `${site.url}/` : '', scripts: '<script src="assets/app.js"></script>' });
 }
 
 // ── 상세 페이지 ──
