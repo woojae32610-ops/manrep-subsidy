@@ -152,7 +152,7 @@ function indexPage() {
   const cb = site.cafeBanner ?? {};
   const banner = `
 <section class="cafeband">
-  <a class="cafeband-link" href="${esc(site.cafeUrl)}" target="_blank" rel="noopener" aria-label="${esc(site.cafeName)} 카페 바로가기">
+  <a class="cafeband-link${bannerImg ? ' has-img' : ''}" href="${esc(site.cafeUrl)}" target="_blank" rel="noopener" aria-label="${esc(site.cafeName)} 카페 바로가기">
     ${bannerImg
       ? `<picture>${bannerMobileImg ? `<source media="(max-width: 560px)" srcset="${bannerMobileImg}">` : ''}<img src="${bannerImg}" alt="${esc(cb.title ?? site.cafeName)}"></picture>`
       : `<div class="cafeband-text">${logoImg ? `<img class="cafeband-emblem-img" src="${logoImg}" alt="">` : '<div class="cafeband-emblem">만</div>'}<div><b>${esc(cb.title ?? site.cafeName)}</b><p>${esc(cb.text ?? '')}</p></div></div>`}
