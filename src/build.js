@@ -107,7 +107,7 @@ function indexPage() {
     ['open', 'green', n((p) => p.status === '접수중' || p.status === '마감임박'), '접수 중'],
     ['soon', 'orange', n((p) => p.status === '마감임박'), '마감 임박 (7일 이내)'],
     ['always', 'blue', n((p) => p.status === '상시'), '상시 접수'],
-    ['new', 'purple', n((p) => p.isNew), '이번 주 새 공고'],
+    ['check', 'purple', n((p) => p.status === '공고별'), '기한은 공고 확인'],
   ].map(([k, c, v, l]) => `<button class="stat ${c}" data-stat="${k}"><div class="n">${v}</div><div class="l">${l}</div></button>`).join('');
 
   const data = {

@@ -53,6 +53,7 @@
       if (state.stat === 'open' && !['접수중', '마감임박'].includes(it.status)) return false;
       if (state.stat === 'always' && it.status !== '상시') return false;
       if (state.stat === 'new' && !it.isNew) return false;
+      if (state.stat === 'check' && it.status !== '공고별') return false;
       if (q && !(it.title + ' ' + it.summary + ' ' + it.org).toLowerCase().includes(q)) return false;
       return true;
     });
