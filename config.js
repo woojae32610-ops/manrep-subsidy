@@ -32,7 +32,7 @@ export default {
       buttonBrand: '만렙사장',  // 버튼 앞쪽 큰 글자 (비우면 없음)
       button: '바로가기 ↗',
       buttonStyle: 'overlay',   // 배너 이미지가 있을 때 버튼 위치: 'overlay' 이미지 위 / 'below' 이미지 아래 띠 / 'none' 버튼 없음(이미지만 클릭)
-      buttonPos: { left: '3.5%', bottom: '20%' }, // overlay 일 때 버튼 자리 (이미지 기준 %). 지금 배너는 제목 아래 빈자리
+      buttonPos: { left: '3.5%', bottom: '16%' }, // overlay 일 때 버튼 자리 (이미지 기준 %). 지금 배너는 제목 아래 빈자리
       bannerLight: true,        // 배너가 흰 바탕이면 true — 테두리를 그려서 페이지 배경과 구분
     },
     // 이용약관·개인정보처리방침 (site/terms.html, site/privacy.html) — 문구는 src/site/legal.js
