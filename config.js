@@ -29,8 +29,11 @@ export default {
     cafeBanner: {
       title: '만렙사장 카페',
       text: '전국 사장님들이 장사 이야기와 지원사업 정보를 나누는 곳이에요. 궁금한 건 카페에서 물어보세요.',
-      button: '카페 바로가기',
-      buttonStyle: 'overlay',   // 배너 이미지가 있을 때 버튼 위치: 'overlay' 이미지 위 왼쪽 아래 / 'below' 이미지 아래 띠 / 'none' 버튼 없음(이미지만 클릭)
+      buttonBrand: '만렙사장',  // 버튼 앞쪽 큰 글자 (비우면 없음)
+      button: '바로가기 ↗',
+      buttonStyle: 'overlay',   // 배너 이미지가 있을 때 버튼 위치: 'overlay' 이미지 위 / 'below' 이미지 아래 띠 / 'none' 버튼 없음(이미지만 클릭)
+      buttonPos: { left: '3.5%', bottom: '20%' }, // overlay 일 때 버튼 자리 (이미지 기준 %). 지금 배너는 제목 아래 빈자리
+      bannerLight: true,        // 배너가 흰 바탕이면 true — 테두리를 그려서 페이지 배경과 구분
     },
     // 이용약관·개인정보처리방침 (site/terms.html, site/privacy.html) — 문구는 src/site/legal.js
     legal: { effective: '2026-10-09', operator: '만렙사장 카페 운영진' },

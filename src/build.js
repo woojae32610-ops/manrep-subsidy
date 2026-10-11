@@ -157,11 +157,11 @@ function indexPage() {
   const cb = site.cafeBanner ?? {};
   const banner = `
 <section class="cafeband">
-  <a class="cafeband-link${bannerImg ? ` has-img style-${cb.buttonStyle || 'overlay'}` : ''}" href="${esc(site.cafeUrl)}" target="_blank" rel="noopener" aria-label="${esc(site.cafeName)} 카페 바로가기">
+  <a class="cafeband-link${bannerImg ? ` has-img style-${cb.buttonStyle || 'overlay'}${cb.bannerLight ? ' light' : ''}` : ''}" href="${esc(site.cafeUrl)}" target="_blank" rel="noopener" aria-label="${esc(site.cafeName)} 카페 바로가기">
     ${bannerImg
       ? `<picture>${bannerMobileImg ? `<source media="(max-width: 560px)" srcset="${bannerMobileImg}">` : ''}<img src="${bannerImg}" alt="${esc(cb.title ?? site.cafeName)}"></picture>`
       : `<div class="cafeband-text">${logoImg ? `<img class="cafeband-emblem-img" src="${logoImg}" alt="">` : '<div class="cafeband-emblem">만</div>'}<div><b>${esc(cb.title ?? site.cafeName)}</b><p>${esc(cb.text ?? '')}</p></div></div>`}
-    ${bannerImg && cb.buttonStyle === 'none' ? '' : `<span class="cafeband-btn">${esc(cb.button ?? '카페 바로가기')} →</span>`}
+    ${bannerImg && cb.buttonStyle === 'none' ? '' : `<span class="cafeband-btn"${bannerImg && cb.buttonStyle !== 'below' && cb.buttonPos ? ` style="left:${esc(cb.buttonPos.left ?? 'auto')};right:${esc(cb.buttonPos.right ?? 'auto')};bottom:${esc(cb.buttonPos.bottom ?? '10%')}"` : ''}>${cb.buttonBrand ? `<b>${esc(cb.buttonBrand)}</b>` : ''}${esc(cb.button ?? '카페 바로가기')}</span>`}
   </a>
 </section>`;
   const body = `
